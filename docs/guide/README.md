@@ -58,6 +58,19 @@ npm run dev
 - 서버 `http://localhost:8080`, 화면 `http://localhost:3000`
 - IntelliJ에서 실행하면 프로젝트 SDK로 Java 21을 지정해 두면 됨 (코드는 Java 17 문법 기준)
 
+### IntelliJ에서 Gradle 프로젝트 연결하기
+저장소 루트(`practice_Security`)를 열면 `build.gradle`이 `dayNN/backend` 아래에 있어서 IntelliJ가 Gradle 프로젝트로 인식하지 못함. 이 상태에서는 `import org.springframework...`에 빨간 줄이 생김 (코드 문제 아님. 터미널의 `gradlew`는 정상 동작)
+
+일차마다 처음 한 번 연결함:
+1. 프로젝트 창에서 `dayNN/backend/build.gradle` 오른쪽 클릭 → **Link Gradle Project**
+   - 또는 오른쪽 Gradle 탭 → `+` → `dayNN/backend/build.gradle` 선택
+2. 오른쪽 아래 동기화(Sync)가 끝날 때까지 기다림 → 빨간 줄이 사라짐
+3. **File → Project Structure → Project SDK**가 Java 21(`ms-21.0.12`)인지 확인
+
+- `build.gradle`을 고친 뒤(예: 시큐리티 의존성 추가)에는 Gradle 탭의 새로고침(Reload) 버튼을 눌러야 새 의존성을 불러옴
+- 연결이 번거로우면 File → Open으로 `dayNN/backend` 폴더만 따로 열어도 됨
+- `src/main/java`에 **Mark Directory as → Sources Root를 누르지 않음**. 누르면 스프링 라이브러리가 없는 루트 모듈(`practiceSecurity`)에도 소스가 등록돼 모듈이 두 개가 되고, 빌드 때 `package org.springframework... does not exist`가 남. 이미 눌렀으면 그 폴더 오른쪽 클릭 → Mark Directory as → Unmark as Sources Root
+
 ## 가이드 목록
 | 번호 | 일차 | 가이드 | 상태 |
 |---|---|---|---|

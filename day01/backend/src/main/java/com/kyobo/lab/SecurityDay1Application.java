@@ -1,5 +1,7 @@
 package com.kyobo.lab;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 1일차 · 01 (스프링 시큐리티 시작)
  *
@@ -11,5 +13,13 @@ package com.kyobo.lab;
  * - 그래서 ApiController, WebConfig, SecurityConfig도 반드시 같은 패키지(또는 하위)에 둬야 함
  * - 이 클래스에는 보안 코드를 넣지 않음. 보안 설정은 SecurityConfig가 따로 맡음
  */
+
+@SpringBootApplication
 public class SecurityDay1Application {
+
+    public static void main(String[] args) {
+
+        // 내장 톰캣을 띄우고, 찾아둔 컨트롤러, 설정 클래스를 모두 등록함
+        SpringApplication.run(SecurityDay1Application.class, args);
+    }
 }
