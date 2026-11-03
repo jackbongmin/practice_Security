@@ -1,0 +1,7 @@
+.omc/
+.idea/
+.vscode/
+**/build/
+**/.gradle/
+**/node_modules/
+**/dist/
