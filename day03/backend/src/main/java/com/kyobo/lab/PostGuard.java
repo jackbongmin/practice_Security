@@ -1,5 +1,7 @@
 package com.kyobo.lab;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 3일차 · 03 (인가: 누가 무엇을 할 수 있나)
  *
@@ -11,5 +13,19 @@ package com.kyobo.lab;
  * - 없는 글이면 false → 작성자가 아님으로 처리함 (관리자가 아니면 403)
  * - 화면에서 버튼을 숨기는 것과 상관없이 서버가 막음. API는 직접 부를 수 있기 때문 (가이드 1-6)
  */
+@Component("postGuard") // 빈 이름을 postGuard로 정함 → @PreAuthorize("@postGuard.isAuthor(...)")
 public class PostGuard {
+
+    private final PostRepository posts;
+
+    public PostGuard(PostRepository posts) {
+        this.posts = posts;
+    }
+
+    // postId번 글의 작성자가 username이면 true
+    public boolean isAuthor(Long postId, String username) {
+        return posts.findById(postId)
+                .map(p -> p.getAuthor().equals(username)) // 글이 있으면 작성자 비교
+                .orElse(false);                           // 글이 없으면 false
+    }
 }
