@@ -11,7 +11,7 @@ practice_Security/
 │  └─ NN_주제.md                    # 일차별 가이드
 └─ dayNN/
    ├─ backend/                     # 실습 코드 (빈 파일을 가이드 보며 채움)
-   └─ frontend/                    # 확인용 React 화면 (수정하지 않음)
+   └─ frontend/                    # 확인용 React 화면 (수정하지 않음. 4일차는 XSS 실습으로 한 줄 고침)
 ```
 
 시작은 [docs/guide/README.md](docs/guide/README.md)에서.

